@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
         int fd = open(argv[i], O_RDONLY);
         if (fd == -1) {
             printf("error: cannot open %s\n", argv[i]);
-            continue;;
+            continue;
         }
     /* get the file size */
         struct stat info;
