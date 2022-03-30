@@ -10,25 +10,25 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-    int * line = NULL;
+    char* line = NULL;
     size_t len = 0;
     int numLine = 1;
     int size = strlen(argv[1]);
 
 
     while ((getline(&line, &len, filePointer)) != -1) {
-        FILE* start = filePointer;
-        FILE* offset = filePointer;
-        while(offset < start + len){
+        char* start = line;
+        char* end = line + len;
+        char* offset = line;
+        while(offset < end){
             offset = strstr(offset, argv[1]);
             if(offset == NULL) break;
-            if(offset + size >= start + len) break;
+            if(offset + size >= end) break;
+            printf("[%d:%ld]\n",numLine, offset-start+1);
             offset += size;
-            printf("[%d:%ld]\n",numLine, offset-start);
         }
         numLine++;
     }
 
-    free(line);
     return 0;
 }
